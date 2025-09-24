@@ -7,11 +7,15 @@
         <div class="container text-center">
             <h1 class="" >Wheys</h1>
             <div class="row">
-                <h2>loop para cards de wheys</h2>
+                @foreach($wheys as $whey)
+                    <p>{{$whey->nome}}</p>
+                @endforeach
             </div>
-            <h1>Multivitaminicos</h1>
+            <h1>Farmacos</h1>
             <div class="row">
-                <h2>loop de multivitaminicos</h2>
+                @foreach($farmacos as $farmaco)
+                    <p>{{$farmaco->nome}}</p>
+                @endforeach
             </div>
         </div>
     </main>

@@ -11,7 +11,6 @@
         header{
             min-height: 25vh;
             background-color: rgb(231, 231, 231);
-            margin-bottom: 5px;
         }
         li{
             list-style-type: none;
@@ -32,20 +31,25 @@
         
         header>nav>ul>li>a:hover{
             background-color: lightblue;
-            transform:scale(1.5);
             transition-duration: .2s;
+        }
+        header>nav>ul>li>form>button:hover{
+            background-color: lightblue !important;
+            transition-duration: .2s !important;
         }
     </style>
 </head>
 <body>
-    <header class="d-flex flex-column position-relative">
-        <img class="img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo de Loja de Esportes.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
-
-        <nav class="container mt-auto ">
-            <ul class=" d-flex justify-content-center">
-                <input class="form-control" type="text" name="buscar" id="buscar" placeholder="Buscar">
+    <header class=" shadow d-flex  flex-column position-relative mb-5">
+        <a href="{{route('paginainicial')}}">
+            <img  class="img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo de Loja de Esportes.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
+        </a>
+        <nav class="mt-auto container ">
+            <input class="form-control" type="text" name="buscar" id="buscar" placeholder="Buscar">
+            <ul class=" flex-wrap d-flex justify-content-center">
+                
                 <li class="m-2 deco">
-                    <a href="#" class="text-decoration-none text-black">Página inicial</a>
+                    <a href="{{route('paginainicial')}}" class="text-decoration-none text-black">Página inicial</a>
                 </li>
                 <li class="m-2 deco">
                     <a href="" class="text-decoration-none text-black">Esportes</a>
@@ -63,7 +67,14 @@
                     <a href="" class="text-decoration-none text-black">Vestiário</a>
                 </li>
                 <li class="m-2 deco">
-                    <a href="" class="text-decoration-none text-black">Login</a>
+                    @if(!Auth::guard('web')->check())
+                        <a href="{{route('usuarios.login')}}" class="text-decoration-none text-black">Login</a>
+                    @else
+                        <form action="{{route('usuarios.logout')}}" method="post">
+                            @csrf
+                            <button type="submit" class=" bg-transparent border-0 text-decoration-none text-black" >Sair</button>
+                        </form>
+                    @endif
                 </li>
             </ul>
         </nav>
@@ -71,7 +82,7 @@
     @yield('content')
 
 
-    <footer class="bg-black position-relative">
+    <footer class="bg-black position-relative mt-5 mb-0">
         <div class="container text-center">
             <div class="row position-absolute translate-middle start-50 top-50">
                 <div class="col">
