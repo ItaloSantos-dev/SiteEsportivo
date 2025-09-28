@@ -27,6 +27,7 @@
         a{
             padding: 5px;
             transition-duration: .2s;
+            border-radius: 5px;
         }
         
         header>nav>ul>li>a:hover{
@@ -42,9 +43,11 @@
 <body>
     <header class=" shadow d-flex  flex-column position-relative mb-5">
         <a href="{{route('paginainicial')}}">
-            <img  class="img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo de Loja de Esportes.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
+            <img  class=" img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo de Loja de Esportes.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
         </a>
         <nav class="mt-auto container ">
+        <a href="{{route('carrinho.index')}}" class="bi bi-cart position-absolute start-0"></a>
+
             <input class="form-control" type="text" name="buscar" id="buscar" placeholder="Buscar">
             <ul class=" flex-wrap d-flex justify-content-center">
                 

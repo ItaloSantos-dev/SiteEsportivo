@@ -19,11 +19,14 @@ class ProdutoFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome'=>$this->faker->word(),
-            'marca_id'=>$this->faker->numberBetween(1,5),
+            'nome'=>"WHEY PROTEIN GROWTH. PROTEÍNA DO SORO DO LEITE PURA.",
+            'marca_id'=>1,
             'subcategoria_id'=>$this->faker->numberBetween(1,5),
-            'imagem'=>$this->faker->imageUrl(200,200),
-            'desc'=>$this->faker->paragraph()
+            'imagem'=>"https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcR3_UpVGDUX8uVmriypER2_eAYvoGUyDdJTKtlP8Lie4Ht9OS3poQEjmQd5nNeCJAPy658Sg3qqcKYd9m5pmgu61ceI-WazxaVgvKpaNTOdZ9TYeRFi57rmSEeSNN8Bw4ZEp1seJy7NTA&usqp=CAc",
+            'desc'=>"Whey protein Growth fornece proteínas para quem deseja hipertrofia e definição muscular, e ele é totalmente sem blends ou adição de outras proteínas.",
+            'created_at'=>now(),
+            'updated_at'=>now()
+
 
         ];
     }

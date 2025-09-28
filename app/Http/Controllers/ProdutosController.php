@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
+use App\Models\Marca;
 use App\Models\Produto;
+use App\Models\Subcategoria;
+use App\Models\Variacao;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -12,17 +16,9 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $wheys = Produto::where('subcategoria_id', 1)->get();
-        $roupas = Produto::where('subcategoria_id', 2)->get();
-        $farmacos = Produto::where('subcategoria_id', 3)->get();
-        $artigos = Produto::where('subcategoria_id', 4)->get();
-        return view('index', [
-            'wheys'=>$wheys,
-            'roupas'=>$roupas,
-            'farmacos'=>$farmacos,
-            'artigos'=>$artigos
 
-        ]);
+
+
 
 
 

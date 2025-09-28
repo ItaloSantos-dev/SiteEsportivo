@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Produto;
+use App\Models\Variacao;
 use Carbon\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProdutoSeeder extends Seeder
+class VariacaoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Produto::factory()->create();
+        Variacao::factory()->create();
     }
 }
