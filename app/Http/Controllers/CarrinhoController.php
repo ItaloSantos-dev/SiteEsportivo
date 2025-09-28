@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use App\Models\Variacao;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
@@ -14,10 +15,19 @@ class CarrinhoController extends Controller
     public function addAoCarrinho($id){
         $itemBuscado = Produto::find($id);
         $variacao = Variacao::where('produto_id', '=', $id)->first();
-        if($variacao){
+        if(Auth::guard('web')->check()){
+            if($variacao){
             $carrinho = session('carrinho',[]);
+            $valorfinal = session('valorfinal',0);
             if(isset($carrinho[$id])){
-                $carrinho[$id]['qtd']+=1;
+                if($carrinho[$id]['qtd']==$variacao->estoque){
+                    return redirect()->route('carrinho.index')->with('info', 'Quantidade disponível atingida');
+                    
+                }
+                else{
+                    $carrinho[$id]['qtd']+=1;
+                }
+                
             }
             else{
                 $carrinho[$id]['produto']=[
@@ -25,21 +35,33 @@ class CarrinhoController extends Controller
                     'nome'=>$itemBuscado->nome,
                     'imagem'=>$itemBuscado->imagem,
                     'preco'=>$variacao->preco,
+                    'variacao_id'=>$variacao->id
+
+
 
                 ];
                 $carrinho[$id]['qtd']=1;  
             }
+            $valorfinal+=$carrinho[$id]['produto']['preco'];
             session()->put('carrinho',$carrinho);
+            session()->put('valorfinal',$valorfinal);
+
             return redirect()->route('carrinho.index')->with('info', 'produto adicionado com sucesso');
+            }
+            else{
+                return redirect()->route('carrinho.index')->with('info', 'erro');
+
+            }
         }
         else{
-            return redirect()->route('carrinho.index')->with('info', 'erro');
-
+          return redirect()->route('usuarios.login')->with('info', 'Você precisa fazer login para ver seu adicionar itens ao carrinho');  
         }
     }
 
     public function limparCarrinho(){
         session()->forget('carrinho');
+        session()->forget('valorfinal');
+
         return redirect()->route('carrinho.index');
 
 
@@ -47,7 +69,13 @@ class CarrinhoController extends Controller
 
     public function index()
     {
-        return view('carrinho');
+        if(Auth::guard('web')->check()){
+            return view('carrinho');
+        }
+        else {
+            return redirect()->route('usuarios.login')->with('info', 'Você precisa fazer login para ver seu carrinho');
+        }
+        
     }
 
     /**

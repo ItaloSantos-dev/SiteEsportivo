@@ -15,7 +15,8 @@
             <h1 class="">Wheys</h1>
             <div class="row">
                 @foreach($wheys as $whey)
-                    <div class="col-md-2">
+                    @if($whey->variacoes->first()->estoque>0)
+                        <div class="col-md-2">
                         <div class="card ">
                             <img src="{{$whey->imagem}}" alt="" class="card-img-top ">
                             <div class="card-body ">
@@ -31,6 +32,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                    
                 @endforeach
             </div>
         </div>
@@ -40,22 +43,24 @@
             <h1 class="">Camisas</h1>
             <div class="row">
                 @foreach($camisas as $camisa)
-                    <div class="col-md-2">
-                        <div class="card ">
-                            <img src="{{$camisa->imagem}}" alt="" class="card-img-top ">
-                            <div class="card-body ">
-                                <div class="card-title">{{$camisa->nome}}</div>
-                                <div class="card-title">{{$camisa->variacoes->first()->tamanho}} {{$camisa->variacoes->first()->unidade}}</div>
-                                <h5 class="card-text">R$: {{$camisa->variacoes->first()->preco}}</h5>
-                            </div>
-                            <div class="card-footer">
-                                <form action="{{route('carrinho.addaocarrinho', $camisa->id)}}" method="post">
-                                    @csrf
-                                    <input type="submit" value="Comprar" class="btn btn-success w-100">
-                                </form>
+                    @if($camisa->variacoes->first()->estoque>0)
+                        <div class="col-md-2">
+                            <div class="card ">
+                                <img src="{{$camisa->imagem}}" alt="" class="card-img-top ">
+                                <div class="card-body ">
+                                    <div class="card-title">{{$camisa->nome}}</div>
+                                    <div class="card-title">{{$camisa->variacoes->first()->tamanho}} {{$camisa->variacoes->first()->unidade}}</div>
+                                    <h5 class="card-text">R$: {{$camisa->variacoes->first()->preco}}</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <form action="{{route('carrinho.addaocarrinho', $camisa->id)}}" method="post">
+                                        @csrf
+                                        <input type="submit" value="Comprar" class="btn btn-success w-100">
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -65,22 +70,24 @@
             <h1 class="">Multivitaminas</h1>
             <div class="row">
                 @foreach($multivitaminas as $multivitamina)
-                    <div class="col-md-2">
-                        <div class="card ">
-                            <img src="{{$multivitamina->imagem}}" alt="" class="card-img-top ">
-                            <div class="card-body ">
-                                <div class="card-title">{{$multivitamina->nome}}</div>
-                                <div class="card-title">{{$multivitamina->variacoes->first()->tamanho}} {{$multivitamina->variacoes->first()->unidade}}</div>
-                                <h5 class="card-text">R$: {{$multivitamina->variacoes->first()->preco}}</h5>
-                            </div>
-                            <div class="card-footer">
-                                <form action="{{route('carrinho.addaocarrinho', $multivitamina->id)}}" method="post">
-                                    @csrf
-                                    <input type="submit" value="Comprar" class="btn btn-success w-100">
-                                </form>
+                    @if($multivitamina->variacoes->first()->estoque>0)
+                        <div class="col-md-2">
+                            <div class="card ">
+                                <img src="{{$multivitamina->imagem}}" alt="" class="card-img-top ">
+                                <div class="card-body ">
+                                    <div class="card-title">{{$multivitamina->nome}}</div>
+                                    <div class="card-title">{{$multivitamina->variacoes->first()->tamanho}} {{$multivitamina->variacoes->first()->unidade}}</div>
+                                    <h5 class="card-text">R$: {{$multivitamina->variacoes->first()->preco}}</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <form action="{{route('carrinho.addaocarrinho', $multivitamina->id)}}" method="post">
+                                        @csrf
+                                        <input type="submit" value="Comprar" class="btn btn-success w-100">
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
 

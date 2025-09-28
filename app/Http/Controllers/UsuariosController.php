@@ -43,6 +43,7 @@ class UsuariosController extends Controller
 
     public function logout(){
         Auth::guard('web')->logout();
+        session()->forget('carrinho');
         return redirect()->route('paginainicial');
     }
 
@@ -74,7 +75,7 @@ class UsuariosController extends Controller
         $usuario->tipo = "cliente";
 
         $usuario->save();
-        return redirect()->route('usuarios.create')->with('info', 'Cadastro feito com sucesso, agora efetue login!');
+        return redirect()->route('usuarios.login')->with('info', 'Cadastro feito com sucesso, agora efetue login!');
 
         
 

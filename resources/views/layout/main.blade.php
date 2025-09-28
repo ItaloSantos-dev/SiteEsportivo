@@ -85,7 +85,7 @@
     @yield('content')
 
 
-    <footer class="bg-black position-relative mt-5 mb-0">
+    <footer class="bg-black position-relative mt-5 mb-0 ">
         <div class="container text-center">
             <div class="row position-absolute translate-middle start-50 top-50">
                 <div class="col">

@@ -4,6 +4,7 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\VendaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class,'index'])->name('paginainicial');
@@ -13,10 +14,14 @@ Route::post('/addaocarrinho/{id}', [CarrinhoController::class, 'addAoCarrinho'])
 Route::post('/limparcarrinho', [CarrinhoController::class, 'limparCarrinho'])->name('carrinho.limparcarrinho');
 
 
+Route::post('/confirmarvenda', [VendaController::class, 'store'])->name('vendas.store');
+
+
+
+
 
 Route::get('/login', [UsuariosController::class, 'login'])->name('usuarios.login');
 Route::post('/logout', [UsuariosController::class, 'logout'])->name('usuarios.logout');
-
 Route::post('/login', [UsuariosController::class, 'validarLogin'])->name('usuarios.validarlogin');
 
 
