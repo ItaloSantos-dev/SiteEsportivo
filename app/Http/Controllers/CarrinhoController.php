@@ -58,6 +58,18 @@ class CarrinhoController extends Controller
         }
     }
 
+    public function removerDoCarrinho($id){
+
+        $carrinho = session()->get('carrinho',[]);
+        $valorfinal = session()->get('valofinal');
+        $valorfinal - $carrinho[$id]['produto']['preco'];
+        unset($carrinho[$id]);
+        session()->put('carrinho', $carrinho);
+        session()->put('valorfinal', $valorfinal);
+
+        return redirect()->route('carrinho.index')->with('info', 'produto removido com sucesso');
+    }
+
     public function limparCarrinho(){
         session()->forget('carrinho');
         session()->forget('valorfinal');

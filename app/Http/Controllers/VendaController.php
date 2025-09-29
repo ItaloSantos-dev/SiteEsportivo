@@ -32,33 +32,38 @@ class VendaController extends Controller
     public function store(Request $request)
     {
         if(session()->has('carrinho')){
-            $novavenda = new Venda();
-            $novavenda ->valor_final=session('valorfinal');
-            $novavenda ->forma=$request->input('forma');
-            $novavenda ->data=now();
-            $novavenda->save();
+            if(session('valorfinal')>0){
+                $novavenda = new Venda();
+                $novavenda ->valor_final=session('valorfinal');
+                $novavenda ->forma=$request->input('forma');
+                $novavenda ->data=now();
+                $novavenda->save();
 
-            $carrinho=session('carrinho');
-            foreach($carrinho as $produto){
-                $variacao=Variacao::find($produto['produto']['variacao_id']);
-                $variacao->estoque-=$produto['qtd'];
-                $variacao->save();
+                $carrinho=session('carrinho');
+                foreach($carrinho as $produto){
+                    $variacao=Variacao::find($produto['produto']['variacao_id']);
+                    $variacao->estoque-=$produto['qtd'];
+                    $variacao->save();
 
-                $produtovenda = new ProdutoVenda();
-                $produtovenda->venda_id = $novavenda->id;
-                $produtovenda->produto_id = $produto['produto']['id'];
-                $produtovenda->quantidade = $produto['qtd'];
-                $produtovenda->valor_unitario = $produto['produto']['preco'];
-                $produtovenda->valor_final = $produto['produto']['preco']*$produto['qtd'];
-                $produtovenda->save();
+                    $produtovenda = new ProdutoVenda();
+                    $produtovenda->venda_id = $novavenda->id;
+                    $produtovenda->produto_id = $produto['produto']['id'];
+                    $produtovenda->quantidade = $produto['qtd'];
+                    $produtovenda->valor_unitario = $produto['produto']['preco'];
+                    $produtovenda->valor_final = $produto['produto']['preco']*$produto['qtd'];
+                    $produtovenda->save();
+                }
+                session()->put('carrinho');
+                session()->put('valorfinal');
+
+                return redirect()->route('carrinho.index')->with('info', 'Compra Concluida com sucesso');
             }
-            session()->put('carrinho');
-            session()->put('valorfinal');
-
-            return redirect()->route('carrinho.index')->with('info', 'Compra Concluida com sucesso');
+            else{
+                return redirect()->route('carrinho.index')->with('info', 'Adicione itens ao carrinho para efetuar uma compra');
+            }
         }
         else{
-            return redirect()->route('carrinho.index');
+            return redirect()->route('carrinho.index')->with('info', 'o carrinho não existe');
         }
     }
 

@@ -6,7 +6,7 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="shortcut icon" href="/public/imagens/Logo de Loja de Esportes.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('imagens/Logo.png') }}" type="image/x-icon">
     <style>
         header{
             min-height: 25vh;
@@ -38,17 +38,30 @@
             background-color: lightblue !important;
             transition-duration: .2s !important;
         }
+        #carrinhobtn{
+            left: 82%;
+        }
     </style>
 </head>
 <body>
     <header class=" shadow d-flex  flex-column position-relative mb-5">
         <a href="{{route('paginainicial')}}">
-            <img  class=" img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo de Loja de Esportes.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
+            <img  class=" img-fluid position-absolute translate-middle start-50" src="{{asset('imagens/Logo.png')}}" style="height: 70px; width: 70px;" alt="" id="logo">
         </a>
         <nav class="mt-auto container ">
-        <a href="{{route('carrinho.index')}}" class="bi bi-cart position-absolute start-0"></a>
+            <a id="carrinhobtn" href="{{route('carrinho.index')}}" class="bi bi-cart position-absolute btn btn-secondary"></a>
 
-            <input class="form-control" type="text" name="buscar" id="buscar" placeholder="Buscar">
+            <div class="col">
+                <input class="form-control " type="search" name="buscar" id="buscar" placeholder="Buscar">
+
+                <form action="" method="get">
+                    <select  class="form-control mt-3" name="filtro" id="filtro" style="width:12.7vw;">
+                        <option value="marcas">Marcas</option>
+                        <option value="categorias">Categorias</option>
+                    </select>
+                </form>
+            </div>
+
             <ul class=" flex-wrap d-flex justify-content-center">
                 
                 <li class="m-2 deco">
@@ -105,6 +118,17 @@
         </div>
     </footer>
 
-    
+    <script>
+        document.getElementById('filtro').addEventListener('change', function(){
+            const valor = this.value;
+            if(valor==='marcas'){
+                window.location.href='/marcas';
+            }
+            else if(valor==='categorias'){
+                window.location.href='/categorias';
+            }
+
+        });
+    </script>
 </body>
 </html>

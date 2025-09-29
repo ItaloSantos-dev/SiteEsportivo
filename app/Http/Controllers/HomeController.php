@@ -20,10 +20,14 @@ class HomeController extends Controller
         $subcategorias = Subcategoria::find(3);//camisas
         $multivitaminas = $subcategorias->produtos()->with('variacoes')->get();
 
+        $subcategorias = Subcategoria::find(4);
+        $pretreinos = $subcategorias->produtos()->with('variacoes')->get();
+
         return view('index', [
             'wheys'=>$wheys,
             'camisas'=>$camisas,
-            'multivitaminas'=> $multivitaminas
+            'multivitaminas'=> $multivitaminas,
+            'pretreinos'=>$pretreinos
         ]);
     }
 }

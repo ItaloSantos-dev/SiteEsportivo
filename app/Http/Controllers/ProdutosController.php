@@ -14,13 +14,15 @@ class ProdutosController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function filtrocategorias(){
+        $categorias = Subcategoria::find(1);
+        $nutricao = $categorias->produtos()->get();
+        return view('filtrocategorias', [
+            'nutricao'=>$nutricao
+        ]);
+    }
     public function index()
     {
-
-
-
-
-
 
     }
 

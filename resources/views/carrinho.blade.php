@@ -12,45 +12,48 @@
 
     }
     #confirmar{
-        min-height: 50vh;
-        min-width: 50vw;
+        min-height: 30vh;
         z-index: 1200;
-        display: none;
+        left: -50%;
+        transition-duration: .3s ;
+
     }
 </style>
 
-<form action="{{route('vendas.store')}}" method="post" id="confirmar" class="container bg-secondary position-absolute start-50 top-50 translate-middle text-center p-2">
+<form action="{{route('vendas.store')}}" method="post" id="confirmar" class="container border shadow rounded bg-light position-absolute  top-50 translate-middle text-center p-2">
     @csrf
-    <div class="row">
+    <div class="row m-2">
+        <h1>Confirmar Compra</h1>
+        <h2>Valor total: R$ {{session('valorfinal')??0}}</h2>
+    </div>
+
+    <div class="row m-2">
         <div class="col">
-            <button type="button" onclick="mostrardiv(0)">Voltar</button>
+            <label class="btn btn-primary" for="pix">PIX</label><br>
+            <input type="radio" onfocus="enableConfi(1)" value="pix" name="forma" id="pix">
+        </div>
+
+        <div class="col">
+            <label class="btn btn-primary" for="credito">Credito</label><br>
+            <input type="radio" onfocus="enableConfi(1)" value="credito" name="forma" id="credito">
+        </div>
+        <div class="col">
+            <label class="btn btn-primary" for="debito">Debito</label><br>
+            <input type="radio" onfocus="enableConfi(1)" value="debito" name="forma" id="debito">
+        </div>
+
+        <div class="col">
+            <label class="btn btn-primary" for="dinheiro">Dinheiro</label><br>
+            <input type="radio" onfocus="enableConfi(1)" value="dinheiro" name="forma" id="dinheiro">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row m-2">
         <div class="col">
-            <label for="pix">PIX</label><br>
-            <input type="radio" value="pix" name="forma" id="pix">
-        </div>
-
-        <div class="col">
-            <label for="credito">Credito</label><br>
-            <input type="radio" value="credito" name="forma" id="credito">
+            <input class="btn btn-success" type="submit" id="btnconf" disabled value="confirmar">
         </div>
         <div class="col">
-            <label for="debito">Debito</label><br>
-            <input type="radio" value="debito" name="forma" id="debito">
-        </div>
-
-        <div class="col">
-            <label for="dinheiro">Dinheiro</label><br>
-            <input type="radio" value="dinheiro" name="forma" id="dinheiro">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <input type="submit" value="confirmar">
+            <button class="btn btn-danger" type="button" onclick="mostrardiv(0)">Voltar</button>
         </div>
     </div>
 </form>
@@ -58,7 +61,7 @@
 <div class="container text-center border p-2 z-0">
     <div class="row sticky-top ">
         <form action="" class="col">
-            <input type="button" onclick="mostrardiv(1)" value="Confirmar compra" class="btn btn-success">
+            <input  type="button" onclick="mostrardiv(1)" value="Confirmar compra" class="btn btn-success">
         </form>
         <div class="col z-0">
             <h1>Carrinho</h1>
@@ -77,7 +80,7 @@
         </div>
     @endif
     @if(session()->has('carrinho'))
-    <div class="row">
+    <div class="row ">
         <div class="col"><strong>NOME</strong></div>
         <div class="col"><strong>PREÇO(UN)</strong></div>
         <div class="col"><strong>QUANTIDADE</strong></div>
@@ -85,7 +88,7 @@
         <div class="col"></div>
     </div>
         @foreach (session('carrinho') as $produto)
-            <div class="row border  gap-0 ">
+            <div class="row border p-2  gap-0 ">
                 <div class="col">
                     {{$produto['produto']['nome']}} 
                 </div>
@@ -101,15 +104,26 @@
                 <div class="col">
                     <img class="max-img-car" src="{{$produto['produto']['imagem']}}" alt="">
                 </div>
+                <div class="col d-flex">
+                    <form action="{{route('carrinho.addaocarrinho', $produto['produto']['id'])}}" method="post">
+                        @csrf
+                        <button type="submit" class="m-1  bi bi-plus btn btn-primary"></button>
+                    </form>
+                    <form action="{{route('carrinho.removerdocarrinho', $produto['produto']['id'])}}" method="post">
+                        @csrf
+                        <button type="submit" class="m-1 bi bi-dash btn btn-danger"></button>
+                    </form>
+                </div>
             </div>
         @endforeach
     <div class="row border mt-3">
         <div class="col">
-            Valor Final: {{session('valorfinal')}}
+            Valor Final: {{session('valorfinal')??0}}
         </div>
     </div>
     @else
-        <p>O carrinho esta vazio</p>
+        <h5>Nada aqui</h5>
+        <img style="height: 22vh;" src="https://arubrasil.com.br/site/images/empty_cart.gif" alt="">
     @endif
 </div>
 
@@ -117,12 +131,22 @@
     function mostrardiv(acao){
         let div = document.getElementById('confirmar');
         if(acao==1){
-            div.style.display="block";
+            div.style.left="50%";
         }
         else{
-            div.style.display="none";
+            div.style.left="-50%";
 
         }
+    }
+    function enableConfi(acao){
+        let btnconf = document.getElementById('btnconf');
+        if(acao==1){
+            btnconf.disabled=false;
+        }
+        else{
+            btnconf.disabled=true;
+        }
+
     }
 </script>
 
