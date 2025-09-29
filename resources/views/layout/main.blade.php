@@ -41,6 +41,15 @@
         #carrinhobtn{
             left: 82%;
         }
+        .card-img-top {
+            transition: transform 0.3s ease;
+        }
+        .card-img-top:hover{
+            cursor: pointer;
+            transform: scale(1.1) ;
+            
+            
+        }
     </style>
 </head>
 <body>
@@ -56,6 +65,7 @@
 
                 <form action="" method="get">
                     <select  class="form-control mt-3" name="filtro" id="filtro" style="width:12.7vw;">
+                        <option value="">Filtrar por:</option>
                         <option value="marcas">Marcas</option>
                         <option value="categorias">Categorias</option>
                     </select>

@@ -26,3 +26,4 @@ Route::get('/cadastro', [UsuariosController::class, 'create'])->name('usuarios.c
 Route::post('/cadastro', [UsuariosController::class, 'store'])->name('usuarios.store');
 
 Route::get('/categorias', [ProdutosController::class, 'filtrocategorias'])->name('produtos.categorias');
+Route::get('/marcas', [ProdutosController::class, 'filtromarcas'])->name('produtos.marcas');

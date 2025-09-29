@@ -11,23 +11,10 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $subcategorias = Subcategoria::find(1);//wheys
-        $wheys = $subcategorias->produtos()->with('variacoes')->get();
-        
-        $subcategorias = Subcategoria::find(2);//camisas
-        $camisas = $subcategorias->produtos()->with('variacoes')->get();
-
-        $subcategorias = Subcategoria::find(3);//camisas
-        $multivitaminas = $subcategorias->produtos()->with('variacoes')->get();
-
-        $subcategorias = Subcategoria::find(4);
-        $pretreinos = $subcategorias->produtos()->with('variacoes')->get();
-
-        return view('index', [
-            'wheys'=>$wheys,
-            'camisas'=>$camisas,
-            'multivitaminas'=> $multivitaminas,
-            'pretreinos'=>$pretreinos
-        ]);
+        $wheys = Produto::where('subcategoria_id', 1)->with('variacoes')->get();
+        $camisas = Produto::where('subcategoria_id', 2)->with('variacoes')->get();
+        $multivitaminas = Produto::where('subcategoria_id', 3)->with('variacoes')->get();
+        $pretreinos = Produto::where('subcategoria_id', 4)->with('variacoes')->get();
+        return view('index', compact('wheys', 'camisas', 'multivitaminas', 'pretreinos'));
     }
 }
