@@ -15,12 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('venda_id');
             $table->unsignedBigInteger('produto_id');
+            $table->unsignedBigInteger('usuario_id');
             $table->integer('quantidade');
             $table->decimal('valor_unitario', 10,2);
             $table->decimal('valor_final', 10,2);
 
             $table->foreign('venda_id')->references('id')->on('vendas')->delete('cascade');
             $table->foreign('produto_id')->references('id')->on('produtos')->delete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->delete('cascade');
+
 
 
 

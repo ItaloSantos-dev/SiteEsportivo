@@ -23,4 +23,8 @@ class Usuario extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function compras(){
+        return $this->hasMany(Venda::class);
+    }
 }

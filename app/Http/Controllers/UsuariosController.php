@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use App\Models\Venda;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -79,6 +80,17 @@ class UsuariosController extends Controller
 
         
 
+    }
+
+    public function verCompras(){
+
+        if(Auth::guard('web')->check()){
+            $compras = Venda::where('usuario_id', Auth::id())->with('produtosComprados.produto')->get();
+            return view('compras', compact('compras'));
+        }
+        else{
+            return redirect()->route('usuarios.login')->with('info', 'Você precisa fazer login');
+        }
     }
 
     /**

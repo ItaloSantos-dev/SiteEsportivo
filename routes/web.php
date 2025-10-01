@@ -20,6 +20,7 @@ Route::post('/confirmarvenda', [VendaController::class, 'store'])->name('vendas.
 Route::get('/login', [UsuariosController::class, 'login'])->name('usuarios.login');
 Route::post('/logout', [UsuariosController::class, 'logout'])->name('usuarios.logout');
 Route::post('/login', [UsuariosController::class, 'validarLogin'])->name('usuarios.validarlogin');
+Route::get('/compras', [UsuariosController::class, 'verCompras'])->name('usuarios.compras');
 
 
 Route::get('/cadastro', [UsuariosController::class, 'create'])->name('usuarios.create');

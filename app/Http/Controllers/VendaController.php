@@ -6,6 +6,7 @@ use App\Models\Produto;
 use App\Models\ProdutoVenda;
 use App\Models\Variacao;
 use App\Models\Venda;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -37,6 +38,7 @@ class VendaController extends Controller
                 $novavenda ->valor_final=session('valorfinal');
                 $novavenda ->forma=$request->input('forma');
                 $novavenda ->data=now();
+                $novavenda ->usuario_id=Auth::id();
                 $novavenda->save();
 
                 $carrinho=session('carrinho');
@@ -47,6 +49,7 @@ class VendaController extends Controller
 
                     $produtovenda = new ProdutoVenda();
                     $produtovenda->venda_id = $novavenda->id;
+                    $produtovenda ->usuario_id=Auth::id();
                     $produtovenda->produto_id = $produto['produto']['id'];
                     $produtovenda->quantidade = $produto['qtd'];
                     $produtovenda->valor_unitario = $produto['produto']['preco'];

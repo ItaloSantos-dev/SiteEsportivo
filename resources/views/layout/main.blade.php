@@ -41,6 +41,10 @@
         #carrinhobtn{
             left: 82%;
         }
+        #userbtn{
+            left: 82%;
+            top: 35%;
+        }
         .card-img-top {
             transition: transform 0.3s ease;
         }
@@ -59,6 +63,8 @@
         </a>
         <nav class="mt-auto container ">
             <a id="carrinhobtn" href="{{route('carrinho.index')}}" class="bi bi-cart position-absolute btn btn-secondary"></a>
+
+            <a id="userbtn" class="bi bi-person btn btn-secondary position-absolute" href="{{route('usuarios.compras')}}"></a>
 
             <div class="col">
                 <input class="form-control " type="search" name="buscar" id="buscar" placeholder="Buscar">

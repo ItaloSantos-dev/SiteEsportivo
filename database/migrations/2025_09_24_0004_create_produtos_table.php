@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nome',100);
             $table->unsignedBigInteger('marca_id');
-            $table->unsignedBigInteger('subcategoria_id');//ex: whey ou hipercalórico da categoria nutrição
             $table->text('imagem');
             $table->text('desc');
             $table->timestamps();
+            $table->unsignedBigInteger('subcategoria_id');//ex: whey ou hipercalórico da categoria nutrição
 
             $table->foreign('marca_id')->references('id')->on('marcas')->delete('cascade');
-            $table->foreign('subcategoria_id')->references('id')->on('categorias')->delete('cascade');
+            $table->foreign('subcategoria_id')->references('id')->on('subcategorias')->delete('cascade');
 
         });
     }
