@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="shortcut icon" href="{{ asset('imagens/Logo.png') }}" type="image/x-icon">
     <style>
+
         header{
             min-height: 25vh;
-            background-color: rgb(231, 231, 231);
+            background-color: rgba(209, 209, 209, 1);
         }
         li{
             list-style-type: none;
@@ -104,7 +105,7 @@
                     @else
                         <form action="{{route('usuarios.logout')}}" method="post">
                             @csrf
-                            <button type="submit" class=" bg-transparent border-0 text-decoration-none text-black" >Sair</button>
+                            <button type="submit" class=" rounded bg-transparent border-0 text-decoration-none text-black" >Sair</button>
                         </form>
                     @endif
                 </li>

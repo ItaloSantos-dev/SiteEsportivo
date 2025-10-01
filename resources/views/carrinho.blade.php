@@ -20,7 +20,7 @@
     }
 </style>
 
-<form action="{{route('vendas.store')}}" method="post" id="confirmar" class="container border shadow rounded bg-light position-absolute  top-50 translate-middle text-center p-2">
+<form action="{{route('vendas.store')}}" method="post" id="confirmar" class="container border shadow rounded bg-light position-absolute  top-50 translate-middle text-center ">
     @csrf
     <div class="row m-2">
         <h1>Confirmar Compra</h1>

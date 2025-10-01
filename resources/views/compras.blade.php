@@ -8,7 +8,7 @@
         transition: max-height 0.4s ease;
     }
     .mt-itens{
-        margin-top:6% !important;
+        margin-top:8% !important;
     }
 </style>
 
@@ -31,10 +31,7 @@
                 </div>
 
                 <div class="col">
-                    <label for="">ITENS</label>
-                    <br>
-                    <button onclick="mostrarItens('{{$loop->index}}')" class="mostrar bi bi-arrow-down btn btn-primary"></button>
-                    <button onclick="ocultarItens('{{$loop->index}}')" class="fechar bi bi-arrow-up btn btn-danger d-none"></button>
+                    <button onclick="mostrarItens('{{$loop->index}}')" class="butao bi bi-arrow-down btn btn-primary"></button>
                 </div>
                 <br>
                 <div class="mt-itens">
@@ -62,35 +59,22 @@
 <script>
     function mostrarItens(div){
         let linhaSelecionada = document.getElementById(div);
-        let btnfechar = linhaSelecionada.querySelector('.fechar')
-        let btnmostrar = linhaSelecionada.querySelector('.mostrar')
+        let btnUnico = linhaSelecionada.querySelector('.butao')
 
-        let outrasLinhas = document.querySelectorAll('.linhasVenda');
-        for (let linha of outrasLinhas){
-            let outrosbtnfechar = linha.querySelector('.fechar')
-            let outrosbtnmostrar = linha.querySelector('.mostrar')
+        if(btnUnico.classList.contains('bi-arrow-down')){
+            let outrasLinhas = document.querySelectorAll('.linhasVenda');
+            for (let linha of outrasLinhas){
+                linha.style.maxHeight="15vh"
+            }
+            linhaSelecionada.style.maxHeight = linhaSelecionada.scrollHeight + "px";
+            btnUnico.classList.replace('bi-arrow-down','bi-arrow-up')
 
-            outrosbtnfechar.classList.add('d-none')
-            outrosbtnmostrar.classList.remove('d-none')
-
-            linha.style.maxHeight="15vh"
         }
+        else{
+            linhaSelecionada.style.maxHeight="15vh"
+            btnUnico.classList.replace('bi-arrow-up','bi-arrow-down')
 
-        linhaSelecionada.style.maxHeight = linhaSelecionada.scrollHeight + "px";
-        btnmostrar.classList.add('d-none');
-        btnfechar.classList.remove('d-none');
-
-    }
-
-    function ocultarItens(div){
-        let linhaSelecionada = document.getElementById(div);
-        let btnfechar = linhaSelecionada.querySelector('.fechar')
-        let btnmostrar = linhaSelecionada.querySelector('.mostrar')
-
-        linhaSelecionada.style.maxHeight = "15vh";
-        btnmostrar.classList.remove('d-none');
-        btnfechar.classList.add('d-none');
-
+        }
     }
 
 </script>

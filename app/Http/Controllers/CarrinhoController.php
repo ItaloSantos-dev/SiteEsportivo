@@ -18,7 +18,7 @@ class CarrinhoController extends Controller
         if(Auth::guard('web')->check()){
             if($variacao){
             $carrinho = session('carrinho',[]);
-            $valorfinal = session('valorfinal',0);
+            $valorfinal = 0;
             if(isset($carrinho[$id])){
                 if($carrinho[$id]['qtd']==$variacao->estoque){
                     return redirect()->route('carrinho.index')->with('info', 'Quantidade disponível atingida');
@@ -42,7 +42,9 @@ class CarrinhoController extends Controller
                 ];
                 $carrinho[$id]['qtd']=1;  
             }
-            $valorfinal+=$carrinho[$id]['produto']['preco'];
+            foreach ($carrinho as $item){
+                $valorfinal += $item['qtd']*$item['produto']['preco'];
+            }
             session()->put('carrinho',$carrinho);
             session()->put('valorfinal',$valorfinal);
 
@@ -61,9 +63,20 @@ class CarrinhoController extends Controller
     public function removerDoCarrinho($id){
 
         $carrinho = session()->get('carrinho',[]);
-        $valorfinal = session()->get('valofinal');
-        $valorfinal - $carrinho[$id]['produto']['preco'];
-        unset($carrinho[$id]);
+        $valorfinal = session()->get('valofinal',0);
+        
+
+        if($carrinho[$id]['qtd']>1){
+            $carrinho[$id]['qtd']-=1;
+        }
+        else{
+            unset($carrinho[$id]);
+        }
+
+        foreach ($carrinho as $item){
+            $valorfinal += $item['qtd']*$item['produto']['preco'];
+        }
+        
         session()->put('carrinho', $carrinho);
         session()->put('valorfinal', $valorfinal);
 
