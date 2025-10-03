@@ -1,7 +1,4 @@
 @extends('layout.main')
-@section('title', 'Esportes')
-@section('content')
-    @extends('layout.main')
 @section('title', 'Categorias')
 @section('content')
     <div class="container  py-4">
@@ -49,4 +46,3 @@
 
 @endsection
 
-@endsection
