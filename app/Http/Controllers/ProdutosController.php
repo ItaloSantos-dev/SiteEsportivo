@@ -14,6 +14,14 @@ class ProdutosController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function esportes(){
+        $powerliftingProds = Produto::where('subcategoria_id', 9)->with('variacoes')->get();
+
+        return view('esportes', compact('powerliftingProds'));
+
+    }
+
     public function filtrocategorias(){
         $nutricao = Produto::whereHas('subcategoria', function($q){
             $q->where('categoria_id',1);

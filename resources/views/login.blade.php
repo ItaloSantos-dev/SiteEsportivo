@@ -23,6 +23,7 @@
         @csrf
         <div class="row">
             <label class="form-label" for="email">Email:</label>
+            
         </div>
 
         <div class="row justify-content-center">

@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="col">
-                    <button onclick="mostrarItens('{{$loop->index}}')" class="butao bi bi-arrow-down btn btn-primary"></button>
+                    <button id="butao" onclick="mostrarItens('{{$loop->index}}')" class=" bi bi-arrow-down btn btn-primary"></button>
                 </div>
                 <br>
                 <div class="mt-itens">
@@ -59,7 +59,7 @@
 <script>
     function mostrarItens(div){
         let linhaSelecionada = document.getElementById(div);
-        let btnUnico = linhaSelecionada.querySelector('.butao')
+        let btnUnico = linhaSelecionada.querySelector('#butao')
 
         if(btnUnico.classList.contains('bi-arrow-down')){
             let outrasLinhas = document.querySelectorAll('.linhasVenda');

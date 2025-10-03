@@ -40,11 +40,11 @@
             transition-duration: .2s !important;
         }
         #carrinhobtn{
-            left: 82%;
+            left: 72%;
         }
         #userbtn{
             left: 82%;
-            top: 35%;
+            
         }
         .card-img-top {
             transition: transform 0.3s ease;
@@ -85,7 +85,7 @@
                     <a href="{{route('paginainicial')}}" class="text-decoration-none text-black">Página inicial</a>
                 </li>
                 <li class="m-2 deco">
-                    <a href="" class="text-decoration-none text-black">Esportes</a>
+                    <a href="{{route('produtos.secaoesporte')}}" class="text-decoration-none text-black">Esportes</a>
                 </li>
                 <li class="m-2 deco">
                     <a href="" class="text-decoration-none text-black">Farmacos</a>
